@@ -6,6 +6,10 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+class Application < Rails::Application
+  config.autoload_paths += Dir[Rails.root.join('app', 'uploaders')]
+end
+
 module Pict
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
