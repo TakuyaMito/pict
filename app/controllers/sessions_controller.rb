@@ -14,6 +14,11 @@ class SessionsController < ApplicationController
     end
   end
 
+  def destroy
+    logout
+    redirect_to root_url, info: 'ログアウトしました'
+  end
+
   private
   def log_in(user)
     session[:user_id] = user.id
@@ -21,5 +26,10 @@ class SessionsController < ApplicationController
 
   def session_params
     params.require(:session).permit(:email, :password)
+  end
+
+  def logout
+    session.delete(:user_id)
+    @current_user = nil
   end
 end
